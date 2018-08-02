@@ -1,7 +1,7 @@
 <template>
-  <div class="main">
+  <div class="myblog">
     <Navbar/>
-		<!-- {{listArticle}} -->
+		{{listArticle}}
 		<div class="container">
 				<div class="card darken-1" style="background-color:#f2a9cb" v-for="quest in listArticle" :key=quest[key]>
 					<div class="card-content black-text" style="background-color:#f2a9cb">
@@ -9,7 +9,7 @@
 						<p align="center">{{quest.author.username}}</p>
 						<br><br>
 						<p align="center" style="background-color:#f2a9cb" v-html="quest.content"></p>
-						<!-- <button @click="deletequest(quest._id)">delete</button> -->
+		
 					</div>
 				</div>
 		</div>
@@ -20,7 +20,7 @@
 import Navbar from '@/components/Navbar.vue'
 
 export default {
-    name: 'main',
+    name: 'myblog',
     components: {
         Navbar
 		},
@@ -34,16 +34,21 @@ export default {
 		},
 		methods:{
 			getArticles:function(){
-				axios.get('http://localhost:3000/articles')
-				.then(articles=>{
-					this.listArticle = articles.data
-					console.log(articles);
-					
-				})
-				.catch(err=>{
-					console.log(err);
-					
-				})
+                var token = localStorage.getItem('token')
+				axios.get('http://localhost:3000/validate',{headers:{token:token}})
+				.then(converttoken=>{
+                    console.log(converttoken.data)
+                    axios.get(`http://localhost:3000/articles/${converttoken.data.id}`)
+                    .then(articles=>{
+                        this.listArticle = articles.data
+                        console.log(articles);
+                        
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        
+                    })
+                })
 			}
 		}
 }

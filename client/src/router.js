@@ -4,6 +4,8 @@ import Home from './views/Home.vue'
 import Blog from './views/Blog.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
+import AddArticle from './views/AddArticle.vue'
+import MyBlog from './views/MyBlog.vue'
 
 Vue.use(Router)
 
@@ -11,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'blog',
+      component: Blog
     },
     {
       path: '/about',
@@ -36,6 +38,16 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: AddArticle
+    },
+    {
+      path: '/myblog',
+      name: 'myblog',
+      component: MyBlog
     }
   ]
 })

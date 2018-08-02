@@ -2,13 +2,13 @@
     <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Logo</a>
-      {{seen}}
+      <!-- {{seen}} -->
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li v-if="seen"><a>Login</a></li>
-        <li v-else><a>Logout</a></li>
-        <li v-if="seen"><a>Register</a></li>
-        <li v-else><a>Add</a></li>
-        <li v-if="!seen"><a>My Blog</a></li>
+        <li v-if="seen"><a @click='login'>Login</a></li>
+        <li v-else><a @click="logout">Logout</a></li>
+        <li v-if="seen"><a @click="register">Register</a></li>
+        <li v-else><a @click="add">Add</a></li>
+        <li v-if="!seen"><a @click="myBlog">My Blog</a></li>
       </ul>
     </div>
   </nav>
@@ -41,10 +41,13 @@ export default {
         logout:function(){
             localStorage.removeItem('token')
             this.seen=true
-            this.$router.replace('/main')
+            this.$router.replace('/blog')
         },
         add:function(){
-            this.$router.replace('/addQuest')
+            this.$router.replace('/add')
+        },
+        myBlog:function(){
+            this.$router.replace('/myblog')
         }
     }   
 }

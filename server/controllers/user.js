@@ -24,7 +24,7 @@ class User{
                 })
             }
             else{
-                res.json("username udah ada")
+                res.json("invalid")
             }
         })
         .catch(err=>{

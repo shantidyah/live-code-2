@@ -1,12 +1,12 @@
 <template>
   <div class="login">
     <Navbar/>
-    <h3>LOGIN</h3>
+    <h3>Login</h3>
 			<div class="row">
 				<div class="input-field col s6">
-					<i class="material-icons prefix">email</i>
-					<input id="icon_email" type="text" class="validate" v-model="email">
-					<label for="icon_email">Email</label>
+					<i class="material-icons prefix">account_box</i>
+					<input id="icon_email" type="text" class="validate" v-model="username">
+					<label for="icon_email">Username</label>
 				</div>
 			</div>
 			<div class="row">
@@ -32,14 +32,14 @@ export default {
 		},
 		data(){
 			return{
-				email:'',
+				username:'',
 				password:''
 			}
 		},
 		methods:{
 			login:function(){
 				axios.post('http://localhost:3000/login',{
-					email:this.email,
+					username:this.username,
 					password:this.password
 				})
 				.then(result=>{
@@ -47,10 +47,10 @@ export default {
 						swal("", "Password/Email Wrong", "warning");
 					}
 					else{
-						// console.log("ini hasil dari methods login",result.data);
+						console.log("ini hasil dari methods login",result.data);
 						localStorage.setItem('token',result.data)
 						// swal("Good job!", "You clicked the button!", "success");
-            this.$router.replace('/main')
+                        this.$router.replace('/blog')
 						
 					}
 				})

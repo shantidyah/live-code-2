@@ -21,12 +21,21 @@ class Article{
     }
     static List(req,res){
         Articles.find({})
-        .then(Articles=>{
-            res.json(Articles)
+        .populate('author')
+        .exec(function(err,articles){
+            if(err){
+                res.json(err)
+            }
+            else{
+                res.json(articles)
+            }
         })
-        .catch(err=>{
-            res.json(err)
-        })
+        // .then(Articles=>{
+        //     res.json(Articles)
+        // })
+        // .catch(err=>{
+        //     res.json(err)
+        // })
     }
     static ListbyUser(req,res){
         Articles.findOne({
